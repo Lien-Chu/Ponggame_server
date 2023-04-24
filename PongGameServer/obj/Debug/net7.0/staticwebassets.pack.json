@@ -9,8 +9,12 @@
       "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Id": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
-      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
+      "Id": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\css\\bootstrap\\bootstrap.original.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.original.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\css\\bootstrap\\bootstrap.original.min.css.map",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.original.min.css.map"
     },
     {
       "Id": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\css\\open-iconic\\FONT-LICENSE",

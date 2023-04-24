@@ -7,8 +7,7 @@
 
 		// paddle height
 		public int Player_y { get; set; }
-
-		public Player(string name, int y)
+        public Player(string name, int y)
 		{
 			Name = name;
 			Player_y = y;

@@ -8,80 +8,125 @@
 <PageTitle>Index</PageTitle>
 
 <div class="form-group">
-    <label>
-        User:
-        <input @bind="userInput"  />
-    </label>
-</div>
-<div class="form-group">
-    <label>
-        Message:
-        <input @bind="messageInput" size="50" />
-    </label>
-</div>
-<button @onclick="Send" disabled="@(!IsConnected)">Send</button>
+	<label>
+		Player name:
+		<input @bind="user" />
+	</label>
+	<br /> <br />
+	<button type="button" class="btn btn-success" @onclick="Send" disabled="@(!IsConnected)">Join the Game</button>
 
-<hr>
+</div>
+<br />
 
 <ul id="messagesList">
-    @foreach (var message in messages)
-    {
-        <li>@message</li>
-    }
+	@foreach (var message in messages)
+	{
+		<li>@message</li>
+	}
 </ul>
-
+<hr>
 <div id="canvasContainer">
-    <canvas id="canvas" width="640" height="480" ></canvas>
+	<canvas id="canvas" width="640" height="280"></canvas>
 </div>
 
 @code {
-    private HubConnection? hubConnection;
-    private List<string> messages = new List<string>();
-    private string? userInput;
-    private string? messageInput;
-    private int paddleY = 250;
+	private HubConnection? hubConnection;
+	private List<string> messages = new List<string>();
+	private string? user;
+	private int _playerId = -1;
+	private bool _isGameStarted = false;
+	private int _player1Y = 250;
+	private int _player2Y = 250;
+	private int _ballX = 320;
+	private int _ballY = 240;
+	private int ballDX = 5;
+	private int ballDY = 5;
+	//private int playerCount = 0;
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            await JSRuntime.InvokeVoidAsync("import", "/javascript/canvas.js");
-        }
-    }
 
-    protected override async Task OnInitializedAsync()
-    {
-        hubConnection = new HubConnectionBuilder()
-            .WithUrl(Navigation.ToAbsoluteUri("/gamehub"))
-            .Build();
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (firstRender)
+		{
+			await JSRuntime.InvokeVoidAsync("import", "/javascript/canvas.js");
+		}
+	}
 
-        hubConnection.On<string, string>("ReceiveMessage", (user, message) =>
-        {
-            var encodedMsg = $"{user}: {message}";
-            messages.Add(encodedMsg);
-            InvokeAsync(StateHasChanged);
-        });
+	private async Task Send()
+	{
+		if (hubConnection is not null)
+		{
+			await hubConnection.SendAsync("SendMessage", user);
+		}
+	}
+	protected override async Task OnInitializedAsync()
+	{
+		hubConnection = new HubConnectionBuilder()
+			.WithUrl(Navigation.ToAbsoluteUri("/gamehub"))
+			.Build();
 
-        await hubConnection.StartAsync();
-    }
+		hubConnection.On<string>("ReceiveMessage", (user) =>
+		{
+			var encodedMsg = $"{user}" + " has joined the game!!";
+			messages.Add(encodedMsg);
+			InvokeAsync(StateHasChanged);
 
-    private async Task Send()
-    {
-        if (hubConnection is not null)
-        {
-            await hubConnection.SendAsync("SendMessage", userInput, messageInput);
+		});
 
-        }
-    }
+		hubConnection.On<int>("AssignPlayerId", (playerId) =>
+	{
+		_playerId = playerId;
+		_isGameStarted = true;
+	});
 
-    public bool IsConnected =>
-        hubConnection?.State == HubConnectionState.Connected;
+		//hubConnection.On("GameStarted", () =>
+		//	{
+		//		_isGameStarted = true;
+		//	});
 
-    public async ValueTask DisposeAsync()
-    {
-        if (hubConnection is not null)
-        {
-            await hubConnection.DisposeAsync();
-        }
-    }
+		hubConnection.On<int, int>("PaddleMoved", (playerId, newY) =>
+		{
+			//playerCount++;
+			if (playerId == 1)
+			{
+				_player1Y = _playerId == 1 ? _player1Y : _player2Y;
+			}
+			else
+			{
+				_player2Y = _playerId == 2 ? _player1Y : _player2Y;
+			}
+		});
+
+		hubConnection.On<int, int>("BallMoved", (newX, newY) =>
+	{
+		_ballX = newX;
+		_ballY = newY;
+	});
+		await hubConnection.StartAsync();
+	}
+
+
+	private void OnKeyDown(KeyboardEventArgs e)
+	{
+		if (e.Code == "ArrowUp")
+		{
+			_player1Y -= 10;
+		}
+		else if (e.Code == "ArrowDown")
+		{
+			_player1Y += 10;
+		}
+	}
+
+
+	public bool IsConnected =>
+		hubConnection?.State == HubConnectionState.Connected;
+
+	public async ValueTask DisposeAsync()
+	{
+		if (hubConnection is not null)
+		{
+			await hubConnection.DisposeAsync();
+		}
+	}
 }

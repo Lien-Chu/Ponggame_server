@@ -4,12 +4,23 @@ namespace PongGameServer.Hubs
 {
     public class GameHub : Hub
     {
-        public async Task SendMessage(string user, string message)
+        //public async Task SendMessage(string user, string message)
+        //{
+        //	await Clients.All.SendAsync("ReceiveMessage", user, message);
+        //}
+
+        public async Task ConnectedAsync(int user_count)
         {
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
+            
+            await Clients.All.SendAsync("UpdatePlayerCount", user_count);
         }
 
-		public async Task StartGame()
+        public async Task SendMessage(string user)
+        {
+            await Clients.All.SendAsync("ReceiveMessage", user);
+        }
+
+        public async Task StartGame()
 		{
 			await Clients.All.SendAsync("GameStarted");
 		}
