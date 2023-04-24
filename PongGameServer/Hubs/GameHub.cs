@@ -2,34 +2,41 @@
 
 namespace PongGameServer.Hubs
 {
-    public class GameHub : Hub
-    {
-        //public async Task SendMessage(string user, string message)
-        //{
-        //	await Clients.All.SendAsync("ReceiveMessage", user, message);
-        //}
+	public class GameHub : Hub
+	{
+		
+		 /* This is also dead code; either fix the code or remove it
+		 */
+		public async Task ConnectedAsync(int user_count)
+		{
 
-        public async Task ConnectedAsync(int user_count)
-        {
-            
-            await Clients.All.SendAsync("UpdatePlayerCount", user_count);
-        }
+			await Clients.All.SendAsync("UpdatePlayerCount", user_count);
+		}
 
-        public async Task SendMessage(string user)
-        {
-            await Clients.All.SendAsync("ReceiveMessage", user);
-        }
+		public async Task SendMessage(string user)
+		{
+			await Clients.Others.SendAsync("ReceiveMessage", user);
+		}
 
-        public async Task StartGame()
+		/*
+		 * This is also dead code; either fix the code or remove it
+		 */
+		public async Task StartGame()
 		{
 			await Clients.All.SendAsync("GameStarted");
 		}
 
+		/*
+		 * This is also dead code; either fix the code or remove it
+		 */
 		public async Task MovePaddle(int playerId, int newY)
 		{
 			await Clients.All.SendAsync("PaddleMoved", playerId, newY);
 		}
 
+		/*
+		 * This is also dead code; either fix the code or remove it
+		 */
 		public async Task MoveBall(int newX, int newY)
 		{
 			await Clients.All.SendAsync("BallMoved", newX, newY);

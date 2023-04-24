@@ -13,7 +13,7 @@
 		<input @bind="user" />
 	</label>
 	<br /> <br />
-	<button type="button" class="btn btn-success" @onclick="Send" disabled="@(!IsConnected)">Join the Game</button>
+	<button type="button" class="btn btn-success" @onclick="HandleJoinGame" disabled="@(!IsConnected)">Join the Game</button>
 
 </div>
 <br />
@@ -34,6 +34,7 @@
 	private List<string> messages = new List<string>();
 	private string? user;
 	private int _playerId = -1;
+	private static int playerNo = 0; // use something like this to keep track of the number of connected players
 	private bool _isGameStarted = false;
 	private int paddle_l;
 	private int paddle_r;
@@ -48,11 +49,35 @@
 	{
 		if (firstRender)
 		{
+			/*
+				* When we import and invoke javascript asynchronously like this
+				* I believe we lose the ability to pass information back and forth
+				* between the razor and the js
+				*
+				* Since the paddles are moved in the js, but the messages are handled in razor
+				* we can't send paddle moved messages when the paddles are moved
+				*
+				* We either need to solve the problem of passing messages between
+				* js and razor, or implement the paddle and ball movement in razor
+				*
+				* If we move the paddle and ball movement to razor, we have to also
+				* handle drawing of the canvas in razor
+				*
+				* So the simple solution is just to move everything to razor and not import js
+				*/
 			await JSRuntime.InvokeVoidAsync("import", "/javascript/canvas.js");
+			/*
+			* this immediately starts the game animation
+			* we should not start the game until we have at least 2 players
+			*
+			* good thing we have the playerNo variable to keep track of the
+			* number of connected players
+			*/
 		}
 	}
 
-	private async Task Send()
+
+	private async Task HandleJoinGame()
 	{
 		if (hubConnection is not null)
 		{
@@ -65,6 +90,13 @@
 			.WithUrl(Navigation.ToAbsoluteUri("/gamehub"))
 			.Build();
 
+		/*
+		* "ReceiveMessage" is a bad name for this command because it doesn't describe
+		* what should happen when this is executed
+		* 
+		* This looks like the code that should be executed when a player joins the game
+		* Maybe a better name would be "NewPlayerJoinedCommand"
+		*/
 		hubConnection.On<string>("ReceiveMessage", (user) =>
 		{
 			var encodedMsg = $"{user}" + " has joined the game!!";
@@ -72,14 +104,23 @@
 			InvokeAsync(StateHasChanged);
 
 		});
-
+		/*
+			* This is the only place AssignPlayerId shows up in the code
+			* It is never called, so this is dead code
+			* You probably meant to do something here
+			*
+			* Either fix and use the code or remove it
+			*/
 		hubConnection.On<int>("AssignPlayerId", (playerId) =>
 	{
 		_playerId = playerId;
 		_isGameStarted = true;
 	});
 
-		
+
+		/*
+			* This is also dead code; either fix the code or remove it
+			*/
 		hubConnection.On<int, int>("PaddleMoved", (playerId, newY) =>
 		{
 			if (playerId == 1)
@@ -91,7 +132,9 @@
 				paddle_r = newY;
 			}
 		});
-
+		/*
+		* This is also dead code; either fix the code or remove it
+		*/
 		hubConnection.On<int, int>("BallMoved", (newX, newY) =>
 	{
 		_ballX += ballDX;
@@ -100,7 +143,11 @@
 		await hubConnection.StartAsync();
 	}
 
-
+	/*
+	* This is dead code: not used by anything
+	* If you meant to use the code, you should use it
+	* If you did not mean to use the code, you should delete it
+	*/
 	private async Task OnKeyDown(KeyboardEventArgs e)
 	{
 		if (e.Code == "ArrowUp")
@@ -118,14 +165,16 @@
 			}
 		}
 	}
-
+	/*
+		* dead code
+		*/
 	private async Task OnKeyUp(KeyboardEventArgs e)
 	{
 		if (e.Code == "w")
 		{
 			if (hubConnection is not null)
 			{
-				await hubConnection.SendAsync("MovePaddle", 1, paddle_l+20);
+				await hubConnection.SendAsync("MovePaddle", 1, paddle_l + 20);
 			}
 
 		}
@@ -133,7 +182,7 @@
 		{
 			if (hubConnection is not null)
 			{
-				await hubConnection.SendAsync("MovePaddle", 1, paddle_l+20);
+				await hubConnection.SendAsync("MovePaddle", 1, paddle_l + 20);
 			}
 		}
 		if (e.Code == "ArrowUp")

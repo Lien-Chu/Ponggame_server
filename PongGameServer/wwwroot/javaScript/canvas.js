@@ -24,7 +24,7 @@ let paddle_r = {
 };
 
 function draw() {
-    
+
     // Draw background
     ctx.clearRect(0, 0, 640, 280);
     ctx.strokeRect(0, 0, 640, 280);
@@ -68,7 +68,9 @@ function draw() {
 }
 
 requestAnimationFrame(draw);
-
+/*
+ * this moves the paddle but doesn't seem to send any data to the server
+ */
 document.addEventListener("keydown", function (event) {
     if (event.code === "ArrowUp") {
         paddle_l.y -= paddle_l.speed;
@@ -110,4 +112,3 @@ document.addEventListener("keydown", function (event) {
 //        }
 //    }
 //}
-
