@@ -1,0 +1,195 @@
+﻿@*@page "/game"
+
+@using PongGameServer.Models
+@using Microsoft.AspNetCore.SignalR.Client
+
+<h1>Pong Game</h1>
+
+<div id="canvasContainer">
+	<canvas id="canvas" width="640" height="480"></canvas>
+</div>
+
+@code {
+	private Canvas2DContext _context;
+	private int _player1Y = 250;
+	private int _player2Y = 250;
+	private int _ballX = 320;
+	private int _ballY = 240;
+	private int _ballSpeedX = 5;
+	private int _ballSpeedY = 5;
+	private int _playerHeight = 80;
+	private int _playerWidth = 20;
+	private int _ballSize = 10;
+	private int _player1Score = 0;
+	private int _player2Score = 0;
+	private bool _isPlaying = false;
+	private bool _isGameOver = false;
+	private bool _isGameStarted = false;
+	private HubConnection _hubConnection;
+	private string _connectionString = "https://localhost:44355/gamehub";
+	private Player _player1;
+	private Player _player2;
+	private Ball _ball;
+	private string _errorMessage;
+
+	protected override async Task OnInitializedAsync()
+	{
+		try
+		{
+			_hubConnection = new HubConnectionBuilder()
+				.WithUrl(_connectionString)
+				.Build();
+
+			_hubConnection.On("GameStarted", () =>
+			{
+				_isGameStarted = true;
+			});
+
+			_hubConnection.On<int, int>("PaddleMoved", (playerId, newY) =>
+			{
+				if (playerId == 1)
+				{
+					_player1Y = newY;
+				}
+				else
+				{
+					_player2Y = newY;
+				}
+			});
+
+			_hubConnection.On<int, int>("BallMoved", (newX, newY) =>
+			{
+				_ballX = newX;
+				_ballY = newY;
+			});
+
+			await _hubConnection.StartAsync();
+
+			// Prompt the user for their name and send it to the server
+			string name = await JSRuntime.InvokeAsync<string>("prompt", "Enter your name:");
+			_player1 = new Player(name, _player1Y);
+			_player2 = new Player("Player 2", _player2Y);
+			_ball = new Ball(_ballX, _ballY, _ballSpeedX, _ballSpeedY);
+
+			await _hubConnection.SendAsync("JoinGame", _player1);
+		}
+		catch (Exception ex)
+		{
+			_errorMessage = $"Error: {ex.Message}";
+		}
+	}
+
+	private async Task UpdatePlayer(Player player)
+	{
+		if (player.Id == 1)
+		{
+			_player1 = player;
+		}
+		else
+		{
+			_player2 = player;
+		}
+		await _hubConnection.SendAsync("MovePaddle", player.Id, player.Player_y);
+	}
+
+	private async Task UpdateBall(Ball ball)
+	{
+		_ball = ball;
+		await _hubConnection.SendAsync("MoveBall", ball.Ball_X, ball.Ball_Y);
+	}
+
+	private void OnKeyDown(KeyboardEventArgs e)
+	{
+		if (e.Code == "ArrowUp")
+		{
+			_player1Y -= 10;
+		}
+		else if (e.Code == "ArrowDown")
+		{
+			_player1Y += 10;
+		}
+	}
+	private void OnKeyUp(KeyboardEventArgs e)
+	{
+		if
+	(e.Code == "ArrowUp" || e.Code == "ArrowDown")
+		{
+			_player1YVelocity = 0;
+		}
+	}
+	private async Task UpdatePlayer(Player player)
+	{
+		await _hubConnection.InvokeAsync("MovePaddle", player.Id, player.Player_y);
+	}
+
+	private async Task UpdateBall(Ball ball)
+	{
+		await _hubConnection.InvokeAsync("MoveBall", ball.Ball_X, ball.Ball_Y);
+	}
+
+	private async Task GameLoop()
+	{
+		while (!_gameOver)
+		{
+			// Move player
+			_player1Y += _player1YVelocity;
+			if (_player1Y < 0)
+			{
+				_player1Y = 0;
+			}
+			else if (_player1Y > _canvasHeight - _paddleHeight)
+			{
+				_player1Y = _canvasHeight - _paddleHeight;
+			}
+
+			// Move ball
+			_ballX += _ballXVelocity;
+			_ballY += _ballYVelocity;
+
+			// Check for collisions with walls
+			if (_ballY < 0 || _ballY > _canvasHeight - _ballSize)
+			{
+				_ballYVelocity = -_ballYVelocity;
+			}
+
+			// Check for collision with paddles
+			if (_ballX <= _paddleWidth)
+			{
+				if (_ballY >= _player1Y && _ballY <= _player1Y + _paddleHeight)
+				{
+					_ballXVelocity = -_ballXVelocity;
+				}
+				else
+				{
+					_gameOver = true;
+					_winner = "Player 2";
+				}
+			}
+			else if (_ballX >= _canvasWidth - _paddleWidth - _ballSize)
+			{
+				if (_ballY >= _player2Y && _ballY <= _player2Y + _paddleHeight)
+				{
+					_ballXVelocity = -_ballXVelocity;
+				}
+				else
+				{
+					_gameOver = true;
+					_winner = "Player 1";
+				}
+			}
+
+			// Update UI
+			var player1 = new Player("Player 1", _player1Y);
+			await UpdatePlayer(player1);
+
+			var ball = new Ball(_ballX, _ballY);
+			await UpdateBall(ball);
+
+			await Task.Delay(1000 / _fps);
+		}
+
+		// Show game over message
+		await JsRuntime.InvokeAsync<object>("alert", $"Game over! {_winner} wins!");
+		Navigation.NavigateTo("/startgame");
+	}
+}*@
