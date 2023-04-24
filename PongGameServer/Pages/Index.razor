@@ -35,12 +35,12 @@
 	private string? user;
 	private int _playerId = -1;
 	private bool _isGameStarted = false;
-	private int _player1Y = 250;
-	private int _player2Y = 250;
-	private int _ballX = 320;
-	private int _ballY = 240;
-	private int ballDX = 5;
-	private int ballDY = 5;
+	private int paddle_l;
+	private int paddle_r;
+	private int _ballX;
+	private int _ballY;
+	private int ballDX;
+	private int ballDY;
 	//private int playerCount = 0;
 
 
@@ -79,45 +79,79 @@
 		_isGameStarted = true;
 	});
 
-		//hubConnection.On("GameStarted", () =>
-		//	{
-		//		_isGameStarted = true;
-		//	});
-
+		
 		hubConnection.On<int, int>("PaddleMoved", (playerId, newY) =>
 		{
-			//playerCount++;
 			if (playerId == 1)
 			{
-				_player1Y = _playerId == 1 ? _player1Y : _player2Y;
+				paddle_l = newY;
 			}
-			else
+			else if (playerId == 2)
 			{
-				_player2Y = _playerId == 2 ? _player1Y : _player2Y;
+				paddle_r = newY;
 			}
 		});
 
 		hubConnection.On<int, int>("BallMoved", (newX, newY) =>
 	{
-		_ballX = newX;
-		_ballY = newY;
+		_ballX += ballDX;
+		_ballY += ballDY;
 	});
 		await hubConnection.StartAsync();
 	}
 
 
-	private void OnKeyDown(KeyboardEventArgs e)
+	private async Task OnKeyDown(KeyboardEventArgs e)
 	{
 		if (e.Code == "ArrowUp")
 		{
-			_player1Y -= 10;
+			if (hubConnection is not null)
+			{
+				await hubConnection.SendAsync("MovePaddle", 1, paddle_l - 20);
+			}
 		}
 		else if (e.Code == "ArrowDown")
 		{
-			_player1Y += 10;
+			if (hubConnection is not null)
+			{
+				await hubConnection.SendAsync("MovePaddle", 1, paddle_l + 20);
+			}
 		}
 	}
 
+	private async Task OnKeyUp(KeyboardEventArgs e)
+	{
+		if (e.Code == "w")
+		{
+			if (hubConnection is not null)
+			{
+				await hubConnection.SendAsync("MovePaddle", 1, paddle_l+20);
+			}
+
+		}
+		else if (e.Code == "s")
+		{
+			if (hubConnection is not null)
+			{
+				await hubConnection.SendAsync("MovePaddle", 1, paddle_l+20);
+			}
+		}
+		if (e.Code == "ArrowUp")
+		{
+			if (hubConnection is not null)
+			{
+				await hubConnection.SendAsync("MovePaddle", 2, paddle_l);
+			}
+
+		}
+		else if (e.Code == "ArrowDown")
+		{
+			if (hubConnection is not null)
+			{
+				await hubConnection.SendAsync("MovePaddle", 2, paddle_l);
+			}
+		}
+	}
 
 	public bool IsConnected =>
 		hubConnection?.State == HubConnectionState.Connected;
