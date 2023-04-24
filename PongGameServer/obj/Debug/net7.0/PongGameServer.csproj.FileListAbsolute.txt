@@ -86,3 +86,7 @@ C:\Users\Vicky\source\PongGameSolution\PongGameServer\obj\Debug\net7.0\refint\Po
 C:\Users\Vicky\source\PongGameSolution\PongGameServer\obj\Debug\net7.0\PongGameServer.pdb
 C:\Users\Vicky\source\PongGameSolution\PongGameServer\obj\Debug\net7.0\PongGameServer.genruntimeconfig.cache
 C:\Users\Vicky\source\PongGameSolution\PongGameServer\obj\Debug\net7.0\ref\PongGameServer.dll
+C:\Users\Vicky\source\PongGameSolution\PongGameServer\bin\Debug\net7.0\Blazor.Extensions.Canvas.JS.dll
+C:\Users\Vicky\source\PongGameSolution\PongGameServer\bin\Debug\net7.0\Blazor.Extensions.Canvas.dll
+C:\Users\Vicky\source\PongGameSolution\PongGameServer\bin\Debug\net7.0\Blazor.Canvas.dll
+C:\Users\Vicky\source\PongGameSolution\PongGameServer\bin\Debug\net7.0\Excubo.Generators.Blazor.Attributes.dll

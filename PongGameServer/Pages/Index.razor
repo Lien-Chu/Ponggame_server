@@ -4,6 +4,9 @@
 @implements IAsyncDisposable
 @using Microsoft.AspNetCore.Components.Web
 @inject IJSRuntime JSRuntime
+@using System.Threading.Tasks
+@using Blazor.Extensions.Canvas
+@using Blazor.Extensions.Canvas.Canvas2D
 
 <PageTitle>Index</PageTitle>
 
@@ -33,8 +36,8 @@
 	private HubConnection? hubConnection;
 	private List<string> messages = new List<string>();
 	private string? user;
-	private int _playerId = -1;
-	private static int playerNo = 0; // use something like this to keep track of the number of connected players
+	private int _playerId = 1;
+	private static int playerNo = 1; // use something like this to keep track of the number of connected players
 	private bool _isGameStarted = false;
 	private int paddle_l;
 	private int paddle_r;
@@ -49,30 +52,7 @@
 	{
 		if (firstRender)
 		{
-			/*
-				* When we import and invoke javascript asynchronously like this
-				* I believe we lose the ability to pass information back and forth
-				* between the razor and the js
-				*
-				* Since the paddles are moved in the js, but the messages are handled in razor
-				* we can't send paddle moved messages when the paddles are moved
-				*
-				* We either need to solve the problem of passing messages between
-				* js and razor, or implement the paddle and ball movement in razor
-				*
-				* If we move the paddle and ball movement to razor, we have to also
-				* handle drawing of the canvas in razor
-				*
-				* So the simple solution is just to move everything to razor and not import js
-				*/
-			await JSRuntime.InvokeVoidAsync("import", "/javascript/canvas.js");
-			/*
-			* this immediately starts the game animation
-			* we should not start the game until we have at least 2 players
-			*
-			* good thing we have the playerNo variable to keep track of the
-			* number of connected players
-			*/
+			await JSRuntime.InvokeVoidAsync("import", "/javascript/canvas.js");	
 		}
 	}
 
@@ -80,103 +60,9 @@
 	{
 		if (hubConnection is not null)
 		{
+
 			await hubConnection.SendAsync("SendMessage", user);
-		}
-	}
-	protected override async Task OnInitializedAsync()
-	{
-		hubConnection = new HubConnectionBuilder()
-			.WithUrl(Navigation.ToAbsoluteUri("/gamehub"))
-			.Build();
-
-		hubConnection.On<string>("NewPlayerJoinedCommand", (user) =>
-		{
-			var encodedMsg = $"{user}" + " has joined the game!!";
-			messages.Add(encodedMsg);
-			Console.WriteLine($"playerNo {playerNo} just connected, we should set the player id and increment playerNo");
-			playerNo++;
-			Console.WriteLine($"playerNo is now {playerNo} the next player that connects will be {playerNo}");
-			InvokeAsync(StateHasChanged);
-
-		});
-
-		hubConnection.On<int>("AssignPlayerId", (playerId) =>
-	{
-		_playerId = playerId;
-		_isGameStarted = true;
-	});
-
-
-		hubConnection.On<int, int>("PaddleMoved", (playerId, newY) =>
-		{
-			if (playerId == 1)
-			{
-				paddle_l = newY;
-			}
-			else if (playerId == 2)
-			{
-				paddle_r = newY;
-			}
-		});
-
-		hubConnection.On<int, int>("BallMoved", (newX, newY) =>
-	{
-		_ballX += ballDX;
-		_ballY += ballDY;
-	});
-		await hubConnection.StartAsync();
-	}
-
-
-	private async Task OnKeyDown(KeyboardEventArgs e)
-	{
-		if (e.Code == "ArrowUp")
-		{
-			if (hubConnection is not null)
-			{
-				await hubConnection.SendAsync("MovePaddle", 1, paddle_l - 20);
-			}
-		}
-		else if (e.Code == "ArrowDown")
-		{
-			if (hubConnection is not null)
-			{
-				await hubConnection.SendAsync("MovePaddle", 1, paddle_l + 20);
-			}
-		}
-	}
-
-	private async Task OnKeyUp(KeyboardEventArgs e)
-	{
-		if (e.Code == "w")
-		{
-			if (hubConnection is not null)
-			{
-				await hubConnection.SendAsync("MovePaddle", 1, paddle_l + 20);
-			}
-
-		}
-		else if (e.Code == "s")
-		{
-			if (hubConnection is not null)
-			{
-				await hubConnection.SendAsync("MovePaddle", 1, paddle_l + 20);
-			}
-		}
-		if (e.Code == "ArrowUp")
-		{
-			if (hubConnection is not null)
-			{
-				await hubConnection.SendAsync("MovePaddle", 2, paddle_l);
-			}
-
-		}
-		else if (e.Code == "ArrowDown")
-		{
-			if (hubConnection is not null)
-			{
-				await hubConnection.SendAsync("MovePaddle", 2, paddle_l);
-			}
+			_playerId++;
 		}
 	}
 
@@ -190,4 +76,101 @@
 			await hubConnection.DisposeAsync();
 		}
 	}
+
+	protected override async Task OnInitializedAsync()
+	{
+		hubConnection = new HubConnectionBuilder()
+			.WithUrl(Navigation.ToAbsoluteUri("/gamehub"))
+			.Build();
+
+		hubConnection.On<string>("NewPlayerJoinedCommand", (user) =>
+		{
+			var encodedMsg = $"{user}" + " has joined the game!! Your ID = " + $"{_playerId}" + ". Your playerNo =" + $"{playerNo}!";
+			messages.Add(encodedMsg);
+			Console.WriteLine($"playerNo _playerId just connected, we should set the player id and increment playerNo");
+			playerNo++;
+			Console.WriteLine($"playerNo is now {playerNo} the next player that connects will be {playerNo}");
+			InvokeAsync(StateHasChanged);
+			if (playerNo >= 2)
+			{
+				//tell gamehub its time to start the game
+				// let ball draw on the both players screen at same time
+
+				StartGame();
+				JSRuntime.InvokeVoidAsync("import", "/javascript/drawBall.js");
+			}
+		});
+
+		hubConnection.On<int, int>("PaddleMoved", (playerId, newY) =>
+		{
+			if (playerId == 1)
+			{
+				paddle_l = newY;
+				hubConnection.SendAsync("PaddleMoved", newY);
+			}
+			else if (playerId == 2)
+			{
+				paddle_r = newY;
+				hubConnection.SendAsync("PaddleMoved", newY);
+			}
+		});
+
+		await hubConnection.StartAsync();
+	}
+
+	//use DrawBall() if 2 players are connected
+
+	public void StartGame()
+	{
+		if (hubConnection is not null)
+		{
+			hubConnection.On<int, int>("BallMoved", (newX, newY) =>
+			{
+				_ballX = newX;
+				_ballY = newY;
+				InvokeAsync(StateHasChanged);
+				JSRuntime.InvokeVoidAsync("updateBallPosition", _ballX, _ballY);
+				hubConnection.SendAsync("BallMoved", _ballX, _ballY);
+			});
+		}
+	}
+
+
+	//private async Task OnKeyDown(KeyboardEventArgs e)
+	//{
+	//	if (e.Code == "ArrowUp")
+	//	{
+	//		if (hubConnection is not null)
+	//		{
+	//			paddle_l -= 20;
+
+	//			if (paddle_l < 0)
+	//			{
+	//				paddle_l = 0;
+	//			}
+	//			else if (paddle_l > 200)
+	//			{
+	//				paddle_l = 200;
+	//			}
+	//			await hubConnection.SendAsync("MovePaddle", 1, paddle_l - 20);
+	//		}
+	//	}
+	//	else if (e.Code == "ArrowDown")
+	//	{
+	//		if (hubConnection is not null)
+	//		{
+	//			paddle_l += 20;
+
+	//			if (paddle_l < 0)
+	//			{
+	//				paddle_l = 0;
+	//			}
+	//			else if (paddle_l > 200)
+	//			{
+	//				paddle_l = 200;
+	//			}
+	//			await hubConnection.SendAsync("MovePaddle", 1, paddle_l + 20);
+	//		}
+	//	}
+	//}
 }

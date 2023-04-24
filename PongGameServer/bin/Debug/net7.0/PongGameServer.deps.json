@@ -8,6 +8,8 @@
     ".NETCoreApp,Version=v7.0": {
       "PongGameServer/1.0.0": {
         "dependencies": {
+          "Blazor.Extensions.Canvas": "1.1.1",
+          "Excubo.Blazor.Canvas": "3.2.20",
           "Microsoft.AspNet.SignalR.Client": "2.4.3",
           "Microsoft.AspNetCore.SignalR.Client": "7.0.5"
         },
@@ -15,6 +17,44 @@
           "PongGameServer.dll": {}
         }
       },
+      "Blazor.Extensions.Canvas/1.1.1": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Components.Web": "6.0.16"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Blazor.Extensions.Canvas.JS.dll": {
+            "assemblyVersion": "0.1.0.0",
+            "fileVersion": "0.1.0.0"
+          },
+          "lib/netstandard2.1/Blazor.Extensions.Canvas.dll": {
+            "assemblyVersion": "0.1.0.0",
+            "fileVersion": "0.1.0.0"
+          }
+        }
+      },
+      "Excubo.Blazor.Canvas/3.2.20": {
+        "dependencies": {
+          "Excubo.Generators.Blazor": "1.14.12",
+          "Excubo.Generators.Grouping": "1.4.17",
+          "Microsoft.AspNetCore.Components": "6.0.16",
+          "Microsoft.AspNetCore.Components.Web": "6.0.16"
+        },
+        "runtime": {
+          "lib/net6.0/Blazor.Canvas.dll": {
+            "assemblyVersion": "3.2.20.0",
+            "fileVersion": "3.2.20.0"
+          }
+        }
+      },
+      "Excubo.Generators.Blazor/1.14.12": {
+        "runtime": {
+          "lib/netstandard2.0/Excubo.Generators.Blazor.Attributes.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Excubo.Generators.Grouping/1.4.17": {},
       "Microsoft.AspNet.SignalR.Client/2.4.3": {
         "dependencies": {
           "Newtonsoft.Json": "11.0.2"
@@ -24,6 +64,34 @@
             "assemblyVersion": "2.4.3.0",
             "fileVersion": "2.4.3.22014"
           }
+        }
+      },
+      "Microsoft.AspNetCore.Authorization/6.0.16": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Metadata": "6.0.16",
+          "Microsoft.Extensions.Logging.Abstractions": "7.0.0",
+          "Microsoft.Extensions.Options": "7.0.1"
+        }
+      },
+      "Microsoft.AspNetCore.Components/6.0.16": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Authorization": "6.0.16",
+          "Microsoft.AspNetCore.Components.Analyzers": "6.0.16"
+        }
+      },
+      "Microsoft.AspNetCore.Components.Analyzers/6.0.16": {},
+      "Microsoft.AspNetCore.Components.Forms/6.0.16": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Components": "6.0.16"
+        }
+      },
+      "Microsoft.AspNetCore.Components.Web/6.0.16": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Components": "6.0.16",
+          "Microsoft.AspNetCore.Components.Forms": "6.0.16",
+          "Microsoft.Extensions.DependencyInjection": "7.0.0",
+          "Microsoft.JSInterop": "6.0.16",
+          "System.IO.Pipelines": "7.0.0"
         }
       },
       "Microsoft.AspNetCore.Connections.Abstractions/7.0.5": {
@@ -62,6 +130,7 @@
           }
         }
       },
+      "Microsoft.AspNetCore.Metadata/6.0.16": {},
       "Microsoft.AspNetCore.SignalR.Client/7.0.5": {
         "dependencies": {
           "Microsoft.AspNetCore.Http.Connections.Client": "7.0.5",
@@ -148,6 +217,7 @@
         }
       },
       "Microsoft.Extensions.Primitives/7.0.0": {},
+      "Microsoft.JSInterop/6.0.16": {},
       "Newtonsoft.Json/11.0.2": {
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {
@@ -166,12 +236,75 @@
       "serviceable": false,
       "sha512": ""
     },
+    "Blazor.Extensions.Canvas/1.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-G+ElSm24MPj3iU2adehrRbVEFQtIR8NPH5M9oBq+RhJ1/Bvit8z6CTaUTVkfiuhgmFVZKJ56D1OdnbZ0u1/lQQ==",
+      "path": "blazor.extensions.canvas/1.1.1",
+      "hashPath": "blazor.extensions.canvas.1.1.1.nupkg.sha512"
+    },
+    "Excubo.Blazor.Canvas/3.2.20": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-j5DWW3nm4S6l8Bq016q54xsDZmE6dtNUb6t2n7gfh0EQEUaWZ4tmL/y1DedRalsC30IPsuX17zc7c4xCheKAbw==",
+      "path": "excubo.blazor.canvas/3.2.20",
+      "hashPath": "excubo.blazor.canvas.3.2.20.nupkg.sha512"
+    },
+    "Excubo.Generators.Blazor/1.14.12": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-DUakNhEK6wlkkIVyc5HrpK6s8PKx4DQJ/73a44gN4m2Q+0MQAnwbyGSUQKyq82ryB07OUm5mUNZZAeh7AuxSTg==",
+      "path": "excubo.generators.blazor/1.14.12",
+      "hashPath": "excubo.generators.blazor.1.14.12.nupkg.sha512"
+    },
+    "Excubo.Generators.Grouping/1.4.17": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/BzoCV1UUSBvFt3u8PzHOlDx4NgOzchkGLjmVPW1OyS6BJU3oj/v1lv6VKE2YtyY2TXtWYXcG0O6ud6Zldkhng==",
+      "path": "excubo.generators.grouping/1.4.17",
+      "hashPath": "excubo.generators.grouping.1.4.17.nupkg.sha512"
+    },
     "Microsoft.AspNet.SignalR.Client/2.4.3": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-W+sWtcEUG4Z2Ea+tLZs4n8SVjpVU/7MSb6TrfJ9/AVdQ0Yu75vaDWzbIvjk1TvoqdyQldrpsWXRyHtGU/jHtiQ==",
       "path": "microsoft.aspnet.signalr.client/2.4.3",
       "hashPath": "microsoft.aspnet.signalr.client.2.4.3.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Authorization/6.0.16": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-cH4jU2xuNptO6HXl2gyF/+lWvIOLXj53x8YPPLQ9vcvSDJwZmdI5+l8MXm/Yk31EI626KwWJr4hxbfZiPw3WhQ==",
+      "path": "microsoft.aspnetcore.authorization/6.0.16",
+      "hashPath": "microsoft.aspnetcore.authorization.6.0.16.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Components/6.0.16": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-AB/AKDLXqdTpA3qIFOgjlfZ2gufGTIiVxLOLURbKkj9goNUWBEZXLM3eqa1XyUL+QNU11D5gANT6V9UzYeZ9Iw==",
+      "path": "microsoft.aspnetcore.components/6.0.16",
+      "hashPath": "microsoft.aspnetcore.components.6.0.16.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Components.Analyzers/6.0.16": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-p4imFdqu/RFa3sX5H579SdfnkKizdZ+Jg14psxgJ9Oaa2Mo1VM/RbcatZrf/PEP32ofi3WBWXgvzdNxF6FPyeg==",
+      "path": "microsoft.aspnetcore.components.analyzers/6.0.16",
+      "hashPath": "microsoft.aspnetcore.components.analyzers.6.0.16.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Components.Forms/6.0.16": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-nPi3GkXKy/sbuH0pKumKuJljcsG9c7yqb9gqsIy6YPdAQOhSyPUIjIeVS7WFqLqCrPQRaouT34m6m0efLYevxg==",
+      "path": "microsoft.aspnetcore.components.forms/6.0.16",
+      "hashPath": "microsoft.aspnetcore.components.forms.6.0.16.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Components.Web/6.0.16": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-k7wdV85awVY+BMKhdrUYan/GeOrJyETKHgot96kk2jS3Fk/qMHGmL14Y0juEgwJIT/zDjIPGQRYI0Dd3of5SSQ==",
+      "path": "microsoft.aspnetcore.components.web/6.0.16",
+      "hashPath": "microsoft.aspnetcore.components.web.6.0.16.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Connections.Abstractions/7.0.5": {
       "type": "package",
@@ -193,6 +326,13 @@
       "sha512": "sha512-ANh3reuf2e3Gm0sHdloMVYypcJ9Dkh64uxVAm9ktz/JOY7VBkSGW75TjBVoFv7Gh4IGXbjagdqI2mp4m8q6HQw==",
       "path": "microsoft.aspnetcore.http.connections.common/7.0.5",
       "hashPath": "microsoft.aspnetcore.http.connections.common.7.0.5.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Metadata/6.0.16": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-nXuClg3284DKBwVp6Dfai+tVDLsqkOMB87mPNocCLjSlgfYRBnf0XpdrJCHKmAipabG75S2HGhUjawYEHJKhVA==",
+      "path": "microsoft.aspnetcore.metadata/6.0.16",
+      "hashPath": "microsoft.aspnetcore.metadata.6.0.16.nupkg.sha512"
     },
     "Microsoft.AspNetCore.SignalR.Client/7.0.5": {
       "type": "package",
@@ -270,6 +410,13 @@
       "sha512": "sha512-um1KU5kxcRp3CNuI8o/GrZtD4AIOXDk+RLsytjZ9QPok3ttLUelLKpilVPuaFT3TFjOhSibUAso0odbOaCDj3Q==",
       "path": "microsoft.extensions.primitives/7.0.0",
       "hashPath": "microsoft.extensions.primitives.7.0.0.nupkg.sha512"
+    },
+    "Microsoft.JSInterop/6.0.16": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-57qernFFApJ+CsA/Mn53TJ9QSreucgfyf91ESBwsIifaG6o9hN56y4VsJ9P0RFbNRbpz+KstKUj/U1HK5tqiGQ==",
+      "path": "microsoft.jsinterop/6.0.16",
+      "hashPath": "microsoft.jsinterop.6.0.16.nupkg.sha512"
     },
     "Newtonsoft.Json/11.0.2": {
       "type": "package",

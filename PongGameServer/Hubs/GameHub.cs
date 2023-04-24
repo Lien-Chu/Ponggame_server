@@ -5,17 +5,10 @@ namespace PongGameServer.Hubs
 	public class GameHub : Hub
 	{
 
-		/* This is also dead code; either fix the code or remove it
-		*/
-		public async Task ConnectedAsync(int user_count)
-		{
-
-			await Clients.All.SendAsync("UpdatePlayerCount", user_count);
-		}
-
+		
 		public async Task SendMessage(string user)
 		{
-			await Clients.Others.SendAsync("NewPlayerJoinedCommand", user);
+			await Clients.All.SendAsync("NewPlayerJoinedCommand", user);
 
 		}
 

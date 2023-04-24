@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "zO3c4kcirTvw/SRbOCs6bizpD3cLwUJNMI2g39ZJ1Mk=",
+  "Hash": "LtFDHs15pYEuJlGm1yiF03jeqAh0JEALVVfOqoVSDTc=",
   "Source": "PongGameServer",
   "BasePath": "_content/PongGameServer",
   "Mode": "Default",
@@ -16,6 +16,23 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "C:\\Users\\Vicky\\.nuget\\packages\\blazor.extensions.canvas\\1.1.1\\staticwebassets\\blazor.extensions.canvas.js",
+      "SourceId": "Blazor.Extensions.Canvas",
+      "SourceType": "Package",
+      "ContentRoot": "C:\\Users\\Vicky\\.nuget\\packages\\blazor.extensions.canvas\\1.1.1\\staticwebassets\\",
+      "BasePath": "_content/Blazor.Extensions.Canvas",
+      "RelativePath": "blazor.extensions.canvas.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\Vicky\\.nuget\\packages\\blazor.extensions.canvas\\1.1.1\\staticwebassets\\blazor.extensions.canvas.js"
+    },
     {
       "Identity": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\obj\\Debug\\net7.0\\scopedcss\\bundle\\PongGameServer.styles.css",
       "SourceId": "PongGameServer",
@@ -304,6 +321,74 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\javaScript\\canvas.js"
+    },
+    {
+      "Identity": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\javaScript\\drawBall.js",
+      "SourceId": "PongGameServer",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\",
+      "BasePath": "_content/PongGameServer",
+      "RelativePath": "javaScript/drawBall.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\javaScript\\drawBall.js"
+    },
+    {
+      "Identity": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\javaScript\\paddle_L.js",
+      "SourceId": "PongGameServer",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\",
+      "BasePath": "_content/PongGameServer",
+      "RelativePath": "javaScript/paddle_L.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\javaScript\\paddle_L.js"
+    },
+    {
+      "Identity": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\javaScript\\paddle_R.js",
+      "SourceId": "PongGameServer",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\",
+      "BasePath": "_content/PongGameServer",
+      "RelativePath": "javaScript/paddle_R.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\javaScript\\paddle_R.js"
+    },
+    {
+      "Identity": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\javaScript\\updateBallPosition.js",
+      "SourceId": "PongGameServer",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\",
+      "BasePath": "_content/PongGameServer",
+      "RelativePath": "javaScript/updateBallPosition.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\javaScript\\updateBallPosition.js"
     }
   ]
 }

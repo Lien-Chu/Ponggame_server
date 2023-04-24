@@ -65,6 +65,22 @@
       "PackagePath": "staticwebassets\\javaScript\\canvas.js"
     },
     {
+      "Id": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\javaScript\\drawBall.js",
+      "PackagePath": "staticwebassets\\javaScript\\drawBall.js"
+    },
+    {
+      "Id": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\javaScript\\paddle_L.js",
+      "PackagePath": "staticwebassets\\javaScript\\paddle_L.js"
+    },
+    {
+      "Id": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\javaScript\\paddle_R.js",
+      "PackagePath": "staticwebassets\\javaScript\\paddle_R.js"
+    },
+    {
+      "Id": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\javaScript\\updateBallPosition.js",
+      "PackagePath": "staticwebassets\\javaScript\\updateBallPosition.js"
+    },
+    {
       "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.PongGameServer.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },
