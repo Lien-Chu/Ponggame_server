@@ -90,14 +90,7 @@
 			.WithUrl(Navigation.ToAbsoluteUri("/gamehub"))
 			.Build();
 
-		/*
-		* "ReceiveMessage" is a bad name for this command because it doesn't describe
-		* what should happen when this is executed
-		* 
-		* This looks like the code that should be executed when a player joins the game
-		* Maybe a better name would be "NewPlayerJoinedCommand"
-		*/
-		hubConnection.On<string>("ReceiveMessage", (user) =>
+		hubConnection.On<string>("NewPlayerJoinedCommand", (user) =>
 		{
 			var encodedMsg = $"{user}" + " has joined the game!!";
 			messages.Add(encodedMsg);

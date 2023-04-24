@@ -15,7 +15,7 @@ namespace PongGameServer.Hubs
 
 		public async Task SendMessage(string user)
 		{
-			await Clients.Others.SendAsync("ReceiveMessage", user);
+			await Clients.Others.SendAsync("NewPlayerJoinedCommand", user);
 		}
 
 		/*
