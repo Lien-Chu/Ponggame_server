@@ -4,9 +4,9 @@ namespace PongGameServer.Hubs
 {
 	public class GameHub : Hub
 	{
-		
-		 /* This is also dead code; either fix the code or remove it
-		 */
+
+		/* This is also dead code; either fix the code or remove it
+		*/
 		public async Task ConnectedAsync(int user_count)
 		{
 
@@ -16,6 +16,7 @@ namespace PongGameServer.Hubs
 		public async Task SendMessage(string user)
 		{
 			await Clients.Others.SendAsync("NewPlayerJoinedCommand", user);
+
 		}
 
 		/*

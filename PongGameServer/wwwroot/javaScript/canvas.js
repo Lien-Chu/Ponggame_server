@@ -46,8 +46,8 @@ function draw() {
     ctx.fillRect(paddle_l.x, paddle_l.y, paddle_l.width, paddle_l.height);
     ctx.fillRect(paddle_r.x, paddle_r.y, paddle_r.width, paddle_r.height);
 
-    _ballX += ballDX;
-    _ballY += ballDY;
+    //_ballX += ballDX;
+    //_ballY += ballDY;
 
     // Bounces when hitting on the walls
     if (_ballY < 0 || _ballY > 280) {

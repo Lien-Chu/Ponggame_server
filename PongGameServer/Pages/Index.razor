@@ -76,7 +76,6 @@
 		}
 	}
 
-
 	private async Task HandleJoinGame()
 	{
 		if (hubConnection is not null)
@@ -94,16 +93,13 @@
 		{
 			var encodedMsg = $"{user}" + " has joined the game!!";
 			messages.Add(encodedMsg);
+			Console.WriteLine($"playerNo {playerNo} just connected, we should set the player id and increment playerNo");
+			playerNo++;
+			Console.WriteLine($"playerNo is now {playerNo} the next player that connects will be {playerNo}");
 			InvokeAsync(StateHasChanged);
 
 		});
-		/*
-			* This is the only place AssignPlayerId shows up in the code
-			* It is never called, so this is dead code
-			* You probably meant to do something here
-			*
-			* Either fix and use the code or remove it
-			*/
+
 		hubConnection.On<int>("AssignPlayerId", (playerId) =>
 	{
 		_playerId = playerId;
@@ -111,9 +107,6 @@
 	});
 
 
-		/*
-			* This is also dead code; either fix the code or remove it
-			*/
 		hubConnection.On<int, int>("PaddleMoved", (playerId, newY) =>
 		{
 			if (playerId == 1)
@@ -125,9 +118,7 @@
 				paddle_r = newY;
 			}
 		});
-		/*
-		* This is also dead code; either fix the code or remove it
-		*/
+
 		hubConnection.On<int, int>("BallMoved", (newX, newY) =>
 	{
 		_ballX += ballDX;
@@ -136,11 +127,7 @@
 		await hubConnection.StartAsync();
 	}
 
-	/*
-	* This is dead code: not used by anything
-	* If you meant to use the code, you should use it
-	* If you did not mean to use the code, you should delete it
-	*/
+
 	private async Task OnKeyDown(KeyboardEventArgs e)
 	{
 		if (e.Code == "ArrowUp")
@@ -158,9 +145,7 @@
 			}
 		}
 	}
-	/*
-		* dead code
-		*/
+
 	private async Task OnKeyUp(KeyboardEventArgs e)
 	{
 		if (e.Code == "w")
