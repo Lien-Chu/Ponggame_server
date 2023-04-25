@@ -6,8 +6,8 @@ const ctx = canvas.getContext("2d");
 
 let _ballX = 320;
 let _ballY = 140;
-let ballDX = 3;
-let ballDY = 3;
+let ballDX = 2;
+let ballDY = 2;
 let paddle_l = {
     x: 15,
     y: 100,
@@ -38,10 +38,10 @@ function DrawBall() {
     ctx.fillRect(paddle_r.x, paddle_r.y, paddle_r.width, paddle_r.height);
 
     // Bounces when hitting on the walls
-    if (_ballY < 0 || _ballY > 280) {
+    if (_ballY < 5 || _ballY > 275) {
         ballDY = -ballDY;
     }
-    if (_ballX < 0 || _ballX > 640) {
+    if (_ballX < 5 || _ballX > 635) {
         ballDX = -ballDX;
         /* await hubConnection.SendAsync("MoveBall", _ballX, _ballY);*/
     }
@@ -105,32 +105,3 @@ requestAnimationFrame(DrawBall)
     });
 /*}*/
 
-//document.addEventListener("keydown", function (event) {
-//    if (event.code === "ArrowUp") {
-//        paddle_l.y -= paddle_l.speed;
-//        paddle_r.y -= paddle_r.speed;
-//        // let paddle not go out of the canvas
-//        if (paddle_l.y < 0 || paddle_r.y < 0) {
-//            paddle_l.y = 0;
-//            paddle_r.y = 0;
-//        } else if (paddle_l.y > 200 || paddle_r.y > 200) {
-//            paddle_l.y = 200;
-//            paddle_r.y = 200;
-//        }
-//        hubConnection.send("MovePaddle", 1, paddle_l.y - paddle_l.speed);
-//        hubConnection.send("MovePaddle", 2, paddle_r.y + paddle_l.speed);
-//    } else if (event.code === "ArrowDown") {
-//        paddle_l.y += paddle_l.speed;
-//        paddle_l.r += paddle_r.speed;
-//        // let paddle not go out of the canvas
-//        if (paddle_l.y < 0 || paddle_r.y < 0) {
-//            paddle_l.y = 0;
-//            paddle_r.y = 0;
-//        } else if (paddle_l.y > 200 || paddle_r.y > 200) {
-//            paddle_l.y = 200;
-//            paddle_r.y = 200;
-//        }
-//        hubConnection.send("MovePaddle", 1, paddle_l.y + paddle_l.speed);
-//        hubConnection.send("MovePaddle", 2, paddle_r.y + paddle_l.speed);
-//    }
-//});

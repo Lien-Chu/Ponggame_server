@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ObLkLlUuUEu0GtmOYelu7AI9Olxnd+Ln627bZqbfGxQ=",
+  "Hash": "50Tw12KrL2di8nI0tF2bXR8rWKt8WceG2X69DPMn0Q8=",
   "Source": "PongGameServer",
   "BasePath": "_content/PongGameServer",
   "Mode": "Default",
@@ -355,57 +355,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\javaScript\\drawPaddles.js"
-    },
-    {
-      "Identity": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\javaScript\\moveLeftPaddle.js",
-      "SourceId": "PongGameServer",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\",
-      "BasePath": "_content/PongGameServer",
-      "RelativePath": "javaScript/moveLeftPaddle.js",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\javaScript\\moveLeftPaddle.js"
-    },
-    {
-      "Identity": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\javaScript\\moveRightPaddle.js",
-      "SourceId": "PongGameServer",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\",
-      "BasePath": "_content/PongGameServer",
-      "RelativePath": "javaScript/moveRightPaddle.js",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\javaScript\\moveRightPaddle.js"
-    },
-    {
-      "Identity": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\javaScript\\updateBallPosition.js",
-      "SourceId": "PongGameServer",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\",
-      "BasePath": "_content/PongGameServer",
-      "RelativePath": "javaScript/updateBallPosition.js",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\javaScript\\updateBallPosition.js"
     }
   ]
 }

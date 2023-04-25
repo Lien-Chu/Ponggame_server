@@ -5,8 +5,8 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 let _ballX = 320;
 let _ballY = 140;
-let ballDX = 3;
-let ballDY = 3;
+let ballDX ;
+let ballDY ;
 
 let paddle_l = {
     x: 15,

@@ -14,11 +14,10 @@ namespace PongGameServer.Hubs
 		{
 			await Clients.All.SendAsync("GameStarted");
 		}
-
 		
 		public async Task MovePaddle(int playerId, int newY)
 		{
-			await Clients.All.SendAsync("PaddleMoved", playerId, newY);
+			await Clients.Others.SendAsync("PaddleMoved", playerId, newY);
 		}
 
 		public async Task MoveBall(int newX, int newY)
