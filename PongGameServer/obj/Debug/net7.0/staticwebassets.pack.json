@@ -61,12 +61,16 @@
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
-      "Id": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\javaScript\\canvas.js",
-      "PackagePath": "staticwebassets\\javaScript\\canvas.js"
+      "Id": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\javaScript\\draw.js",
+      "PackagePath": "staticwebassets\\javaScript\\draw.js"
     },
     {
       "Id": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\javaScript\\drawBall.js",
       "PackagePath": "staticwebassets\\javaScript\\drawBall.js"
+    },
+    {
+      "Id": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\javaScript\\drawPaddles.js",
+      "PackagePath": "staticwebassets\\javaScript\\drawPaddles.js"
     },
     {
       "Id": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\javaScript\\moveLeftPaddle.js",

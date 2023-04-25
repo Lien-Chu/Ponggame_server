@@ -29,7 +29,7 @@
 </ul>
 <hr>
 <div id="canvasContainer">
-	<canvas id="canvas" width="640" height="280"></canvas>
+	<canvas id="canvas" @*@ref="canvasRef"*@ width="640" height="280"></canvas>
 </div>
 
 @code {
@@ -39,6 +39,8 @@
 	private int _playerId = 1;
 	private static int playerNo = 1; // use something like this to keep track of the number of connected players
 	private bool _isGameStarted = false;
+	//private Canvas2DContext _context;
+	//private ElementReference canvasRef;
 	private int paddle_l;
 	private int paddle_r;
 	private int _ballX;
@@ -52,7 +54,7 @@
 	{
 		if (firstRender)
 		{
-			await JSRuntime.InvokeVoidAsync("import", "/javascript/canvas.js");
+			await JSRuntime.InvokeVoidAsync("import", "/javascript/draw.js");		
 		}
 	}
 
@@ -85,7 +87,7 @@
 
 		hubConnection.On<string>("NewPlayerJoinedCommand", (user) =>
 		{
-			var encodedMsg = $"{user}" + " has joined the game!! Your ID = " + $"{_playerId}" + ". Your playerNo =" + $"{playerNo}!";
+			var encodedMsg = $"{user}" + " has joined the game!! Your ID = " + $"{_playerId}" + "!";
 			messages.Add(encodedMsg);
 			Console.WriteLine($"playerNo _playerId just connected, we should set the player id and increment playerNo");
 			playerNo++;
@@ -103,16 +105,18 @@
 
 		hubConnection.On<int, int>("PaddleMoved", (playerId, newY) =>
 		{
+
 			if (playerId == 1)
 			{
 				paddle_l = newY;
-				hubConnection.SendAsync("PaddleMoved", newY);
 			}
 			else if (playerId == 2)
 			{
-				paddle_r = newY;
-				hubConnection.SendAsync("PaddleMoved", newY);
+				paddle_r = newY;		
 			}
+			JSRuntime.InvokeVoidAsync("DrawPaddles");
+
+			hubConnection.SendAsync("MovePaddle", newY);
 		});
 
 		await hubConnection.StartAsync();
@@ -130,9 +134,17 @@
 				_ballY = newY;
 				InvokeAsync(StateHasChanged);
 				JSRuntime.InvokeVoidAsync("updateBallPosition", _ballX, _ballY);
-				hubConnection.SendAsync("BallMoved", _ballX, _ballY);
+				hubConnection.SendAsync("MoveBall", _ballX, _ballY);
 			});
 		}
 	}
+	//private async Task Draw()
+	//{
+	//	var ctx = await canvasRef.CreateCanvas2DAsync();
+	//	await jsRuntime.InvokeVoidAsync("draw", canvasRef);
 
+	//}
 }
+
+
+

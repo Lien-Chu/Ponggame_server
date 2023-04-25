@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "7Ddm5nTesn6vpdm563wXurQhvTQhM8T+mbmuicmr81Y=",
+  "Hash": "ObLkLlUuUEu0GtmOYelu7AI9Olxnd+Ln627bZqbfGxQ=",
   "Source": "PongGameServer",
   "BasePath": "_content/PongGameServer",
   "Mode": "Default",
@@ -306,12 +306,12 @@
       "OriginalItemSpec": "wwwroot\\favicon.png"
     },
     {
-      "Identity": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\javaScript\\canvas.js",
+      "Identity": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\javaScript\\draw.js",
       "SourceId": "PongGameServer",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\",
       "BasePath": "_content/PongGameServer",
-      "RelativePath": "javaScript/canvas.js",
+      "RelativePath": "javaScript/draw.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -320,7 +320,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\javaScript\\canvas.js"
+      "OriginalItemSpec": "wwwroot\\javaScript\\draw.js"
     },
     {
       "Identity": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\javaScript\\drawBall.js",
@@ -338,6 +338,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\javaScript\\drawBall.js"
+    },
+    {
+      "Identity": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\javaScript\\drawPaddles.js",
+      "SourceId": "PongGameServer",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\",
+      "BasePath": "_content/PongGameServer",
+      "RelativePath": "javaScript/drawPaddles.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\javaScript\\drawPaddles.js"
     },
     {
       "Identity": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\javaScript\\moveLeftPaddle.js",
