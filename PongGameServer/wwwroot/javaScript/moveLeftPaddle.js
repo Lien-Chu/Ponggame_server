@@ -1,4 +1,4 @@
-﻿function MoveLeftPaddle() {
+﻿function moveLeftPaddle() {
     document.addEventListener("keydown", function (event) {
         if (event.code === "ArrowUp") {
             paddle_l.y -= paddle_l.speed;

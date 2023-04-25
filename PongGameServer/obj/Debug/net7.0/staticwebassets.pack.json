@@ -69,12 +69,12 @@
       "PackagePath": "staticwebassets\\javaScript\\drawBall.js"
     },
     {
-      "Id": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\javaScript\\paddle_L.js",
-      "PackagePath": "staticwebassets\\javaScript\\paddle_L.js"
+      "Id": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\javaScript\\moveLeftPaddle.js",
+      "PackagePath": "staticwebassets\\javaScript\\moveLeftPaddle.js"
     },
     {
-      "Id": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\javaScript\\paddle_R.js",
-      "PackagePath": "staticwebassets\\javaScript\\paddle_R.js"
+      "Id": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\javaScript\\moveRightPaddle.js",
+      "PackagePath": "staticwebassets\\javaScript\\moveRightPaddle.js"
     },
     {
       "Id": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\javaScript\\updateBallPosition.js",

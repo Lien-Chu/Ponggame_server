@@ -57,57 +57,80 @@ function DrawBall() {
 
 requestAnimationFrame(DrawBall)
 
+/*function moveLeftPaddle() {*/
+    document.addEventListener("keydown", function (event) {
+        if (event.code === "KeyW") {
+            paddle_l.y -= paddle_l.speed;
+            // let paddle not go out of the canvas
+            if (paddle_l.y < 0) {
+                paddle_l.y = 0;
+            } else if (paddle_l.y > 200) {
+                paddle_l.y = 200;
+            }
+            hubConnection.send("MovePaddle", 1, paddle_l.y - paddle_l.speed);
+        } else if (event.code === "KeyS") {
+            paddle_l.y += paddle_l.speed;
+            // let paddle not go out of the canvas
+            if (paddle_l.y < 0) {
+                paddle_l.y = 0;
+            } else if (paddle_l.y > 200) {
+                paddle_l.y = 200;
+            }
+            hubConnection.send("MovePaddle", 1, paddle_l.y + paddle_l.speed);
+        }
+    });
+/*}*/
+
+//function moveRightPaddle() {
+    document.addEventListener("keydown", function (event) {
+        if (event.code === "ArrowUp") {
+            paddle_r.y -= paddle_r.speed;
+            // let paddle not go out of the canvas
+            if (paddle_r.y < 0) {
+                paddle_r.y = 0;
+            } else if (paddle_l.y > 200) {
+                paddle_r.y = 200;
+            }
+            hubConnection.send("MovePaddle", 1, paddle_r.y - paddle_r.speed);
+        } else if (event.code === "ArrowDown") {
+            paddle_r.y += paddle_r.speed;
+            // let paddle not go out of the canvas
+            if (paddle_r.y < 0) {
+                paddle_r.y = 0;
+            } else if (paddle_r.y > 200) {
+                paddle_r.y = 200;
+            }
+            hubConnection.send("MovePaddle", 1, paddle_r.y + paddle_r.speed);
+        }
+    });
+/*}*/
+
 //document.addEventListener("keydown", function (event) {
 //    if (event.code === "ArrowUp") {
 //        paddle_l.y -= paddle_l.speed;
+//        paddle_r.y -= paddle_r.speed;
 //        // let paddle not go out of the canvas
-//        if (paddle_l.y < 0) {
+//        if (paddle_l.y < 0 || paddle_r.y < 0) {
 //            paddle_l.y = 0;
-//        } else if (paddle_l.y > 200) {
+//            paddle_r.y = 0;
+//        } else if (paddle_l.y > 200 || paddle_r.y > 200) {
 //            paddle_l.y = 200;
+//            paddle_r.y = 200;
 //        }
-
 //        hubConnection.send("MovePaddle", 1, paddle_l.y - paddle_l.speed);
+//        hubConnection.send("MovePaddle", 2, paddle_r.y + paddle_l.speed);
 //    } else if (event.code === "ArrowDown") {
 //        paddle_l.y += paddle_l.speed;
+//        paddle_l.r += paddle_r.speed;
 //        // let paddle not go out of the canvas
-//        if (paddle_l.y < 0) {
+//        if (paddle_l.y < 0 || paddle_r.y < 0) {
 //            paddle_l.y = 0;
-//        } else if (paddle_l.y > 200) {
+//            paddle_r.y = 0;
+//        } else if (paddle_l.y > 200 || paddle_r.y > 200) {
 //            paddle_l.y = 200;
+//            paddle_r.y = 200;
 //        }
 //        hubConnection.send("MovePaddle", 1, paddle_l.y + paddle_l.speed);
+//        hubConnection.send("MovePaddle", 2, paddle_r.y + paddle_l.speed);
 //    }
 //});
-
-
-
-document.addEventListener("keydown", function (event) {
-    if (event.code === "ArrowUp") {
-        paddle_l.y -= paddle_l.speed;
-        paddle_r.y -= paddle_r.speed;
-        // let paddle not go out of the canvas
-        if (paddle_l.y < 0 || paddle_r.y < 0) {
-            paddle_l.y = 0;
-            paddle_r.y = 0;
-        } else if (paddle_l.y > 200 || paddle_r.y > 200) {
-            paddle_l.y = 200;
-            paddle_r.y = 200;
-        }
-        hubConnection.send("MovePaddle", 1, paddle_l.y - paddle_l.speed);
-        hubConnection.send("MovePaddle", 2, paddle_r.y + paddle_l.speed);
-    } else if (event.code === "ArrowDown") {
-        paddle_l.y += paddle_l.speed;
-        paddle_l.r += paddle_r.speed;
-        // let paddle not go out of the canvas
-        if (paddle_l.y < 0 || paddle_r.y < 0) {
-            paddle_l.y = 0;
-            paddle_r.y = 0;
-        } else if (paddle_l.y > 200 || paddle_r.y > 200) {
-            paddle_l.y = 200;
-            paddle_r.y = 200;
-        }
-        hubConnection.send("MovePaddle", 1, paddle_l.y + paddle_l.speed);
-        hubConnection.send("MovePaddle", 2, paddle_r.y + paddle_l.speed);
-    }
-});

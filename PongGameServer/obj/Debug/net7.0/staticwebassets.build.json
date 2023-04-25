@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "LtFDHs15pYEuJlGm1yiF03jeqAh0JEALVVfOqoVSDTc=",
+  "Hash": "7Ddm5nTesn6vpdm563wXurQhvTQhM8T+mbmuicmr81Y=",
   "Source": "PongGameServer",
   "BasePath": "_content/PongGameServer",
   "Mode": "Default",
@@ -340,12 +340,12 @@
       "OriginalItemSpec": "wwwroot\\javaScript\\drawBall.js"
     },
     {
-      "Identity": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\javaScript\\paddle_L.js",
+      "Identity": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\javaScript\\moveLeftPaddle.js",
       "SourceId": "PongGameServer",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\",
       "BasePath": "_content/PongGameServer",
-      "RelativePath": "javaScript/paddle_L.js",
+      "RelativePath": "javaScript/moveLeftPaddle.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -354,15 +354,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\javaScript\\paddle_L.js"
+      "OriginalItemSpec": "wwwroot\\javaScript\\moveLeftPaddle.js"
     },
     {
-      "Identity": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\javaScript\\paddle_R.js",
+      "Identity": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\javaScript\\moveRightPaddle.js",
       "SourceId": "PongGameServer",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\",
       "BasePath": "_content/PongGameServer",
-      "RelativePath": "javaScript/paddle_R.js",
+      "RelativePath": "javaScript/moveRightPaddle.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -371,7 +371,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\javaScript\\paddle_R.js"
+      "OriginalItemSpec": "wwwroot\\javaScript\\moveRightPaddle.js"
     },
     {
       "Identity": "C:\\Users\\Vicky\\source\\PongGameSolution\\PongGameServer\\wwwroot\\javaScript\\updateBallPosition.js",

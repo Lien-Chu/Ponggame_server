@@ -52,7 +52,7 @@
 	{
 		if (firstRender)
 		{
-			await JSRuntime.InvokeVoidAsync("import", "/javascript/canvas.js");	
+			await JSRuntime.InvokeVoidAsync("import", "/javascript/canvas.js");
 		}
 	}
 
@@ -135,42 +135,4 @@
 		}
 	}
 
-
-	//private async Task OnKeyDown(KeyboardEventArgs e)
-	//{
-	//	if (e.Code == "ArrowUp")
-	//	{
-	//		if (hubConnection is not null)
-	//		{
-	//			paddle_l -= 20;
-
-	//			if (paddle_l < 0)
-	//			{
-	//				paddle_l = 0;
-	//			}
-	//			else if (paddle_l > 200)
-	//			{
-	//				paddle_l = 200;
-	//			}
-	//			await hubConnection.SendAsync("MovePaddle", 1, paddle_l - 20);
-	//		}
-	//	}
-	//	else if (e.Code == "ArrowDown")
-	//	{
-	//		if (hubConnection is not null)
-	//		{
-	//			paddle_l += 20;
-
-	//			if (paddle_l < 0)
-	//			{
-	//				paddle_l = 0;
-	//			}
-	//			else if (paddle_l > 200)
-	//			{
-	//				paddle_l = 200;
-	//			}
-	//			await hubConnection.SendAsync("MovePaddle", 1, paddle_l + 20);
-	//		}
-	//	}
-	//}
 }
